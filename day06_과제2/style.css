@@ -8,13 +8,14 @@
   --u: min(1vh, 1.45vw);
   --paper: #f7f3ea;
   --ink: #161616;
-  --muted: #5c574e;
+  --muted: #6f6a60;
   --line: #9c978c;
   --accent: #0b6fb8;
   --bg-1: #ffffff;
   --bg-2: #ecebe8;
-  --holder: rgba(255, 255, 255, 0.7);
+  --holder: linear-gradient(115deg, rgba(255,255,255,0.75) 0%, rgba(235,238,240,0.45) 45%, rgba(255,255,255,0.7) 100%);
   --holder-edge: rgba(0, 0, 0, 0.14);
+  --hole-edge: rgba(0, 0, 0, 0.2);
   --hole: #f1f1f0;
   --photo-bg: #e6ded2;
   --photo-frame: #ffffff;
@@ -33,6 +34,7 @@
     --bg-2: #121417;
     --holder: rgba(255, 255, 255, 0.08);
     --holder-edge: rgba(255, 255, 255, 0.18);
+    --hole-edge: rgba(255, 255, 255, 0.18);
     --hole: #1a1c1f;
     --photo-bg: #3a3631;
     --photo-frame: #4d4943;
@@ -75,6 +77,7 @@ body {
 .holder {
   position: relative;
   width: calc(var(--u) * 64);
+  height: calc(var(--u) * 90);
   margin-top: calc(var(--u) * 4);
   padding: calc(var(--u) * 11) calc(var(--u) * 3) calc(var(--u) * 3);
   background: var(--holder);
@@ -113,7 +116,7 @@ body {
 .slot {
   display: block;
   height: calc(var(--u) * 3.6);
-  border: 1px solid var(--holder-edge);
+  border: 1px solid var(--hole-edge);
   background: var(--hole);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
 }
@@ -146,6 +149,7 @@ body {
 .badge {
   display: flex;
   flex-direction: column;
+  height: 100%;
   padding: calc(var(--u) * 2.6) calc(var(--u) * 3.2) calc(var(--u) * 2);
   background: var(--paper);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
@@ -214,18 +218,28 @@ h1 {
 }
 
 /* ---------- 본문 ---------- */
+/* 소개 · 작업 · 연락처 세 덩어리를 같은 간격으로 나눔 */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: calc(var(--u) * 1.4);
+  min-height: 0;
+  padding: calc(var(--u) * 1) 0;
+}
+
 /* 소개 영역 : 모바일은 사진 위·글 아래 */
 #intro {
   display: flex;
   flex-direction: column;
   gap: calc(var(--u) * 0.8);
-  margin-top: calc(var(--u) * 1.6);
 }
 
 /* 증명사진 (크기 고정) */
 .photo {
   flex: none;
-  height: calc(var(--u) * 15.6);
+  height: calc(var(--u) * 17);
   aspect-ratio: 4 / 5;
   margin: 0 auto;
   background: var(--photo-bg);
@@ -279,10 +293,6 @@ h1 {
   letter-spacing: 0.15em;
 }
 
-#work {
-  margin-top: calc(var(--u) * 1.4);
-}
-
 .cards {
   display: flex;
   flex-direction: column;
@@ -324,17 +334,12 @@ h1 {
 }
 
 /* 연락처 폼 */
-#contact {
-  margin-top: calc(var(--u) * 1.4);
-}
-
 fieldset {
   border: none;
   display: grid;
   grid-template-columns: 1fr 2fr auto;
   align-items: end;
   gap: 0 calc(var(--u) * 1.2);
-  padding-bottom: calc(var(--u) * 1.2);
 }
 
 legend {
@@ -379,7 +384,7 @@ form button:hover {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: calc(var(--u) * 2.2);
+  margin-top: calc(var(--u) * 1.4);
 }
 
 .fine {
@@ -412,6 +417,15 @@ form button:hover {
 @media (max-width: 767px) {
   :root {
     --u: min(calc((100vw - 32px) / 64), 9px);
+  }
+
+  .holder {
+    height: auto;
+  }
+
+  main {
+    gap: 18px;
+    padding: 14px 0 6px;
   }
 
   body {
